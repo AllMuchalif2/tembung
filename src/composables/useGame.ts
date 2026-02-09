@@ -49,8 +49,12 @@ export function useGame(): UseGameReturn {
 
     for (let i = 0; i < currentRow.value; i++) {
       const guess = guesses.value[i]
+      if (!guess) continue
+
       for (let j = 0; j < guess.length; j++) {
         const char = guess[j]
+        if (!char) continue
+
         if (solution.value[j] === char) {
           statuses[char] = 'correct'
         } else if (solution.value.includes(char) && statuses[char] !== 'correct') {
@@ -105,7 +109,7 @@ export function useGame(): UseGameReturn {
     if (gameState.value !== 'playing') return
     if (isRevealing.value) return
 
-    const current = guesses.value[currentRow.value]
+    const current = guesses.value[currentRow.value] ?? ''
 
     if (key === 'Enter') {
       if (current.length === 5) {
@@ -116,7 +120,7 @@ export function useGame(): UseGameReturn {
     } else if (key === 'Backspace') {
       guesses.value[currentRow.value] = current.slice(0, -1)
     } else if (current.length < 5 && /^[A-Z]$/i.test(key)) {
-      guesses.value[currentRow.value] += key.toUpperCase()
+      guesses.value[currentRow.value] = current + key.toUpperCase()
     }
   }
 
@@ -179,12 +183,14 @@ export function useGame(): UseGameReturn {
 
   // Get letter class for styling
   const getLetterClass = (row: number, col: number): string => {
+    const rowGuess = guesses.value[row] ?? ''
+
     if (row > currentRow.value || (row === currentRow.value && gameState.value === 'playing')) {
-      return guesses.value[row][col] ? 'border-slate-500 scale-105' : 'border-slate-700'
+      return rowGuess[col] ? 'border-slate-500 scale-105' : 'border-slate-700'
     }
 
-    const guess = guesses.value[row]
-    const char = guess?.[col]
+    const guess = guesses.value[row] ?? ''
+    const char = guess[col]
     if (!char) return 'border-slate-700'
 
     if (solution.value[col] === char) {

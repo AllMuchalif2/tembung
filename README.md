@@ -2,11 +2,11 @@
 
 Game tebak kata berbahasa Jawa, terinspirasi dari Wordle & Katla. Dibangun dengan Vue 3 + TypeScript + Tailwind CSS.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-BADGE-ID/deploy-status)](https://app.netlify.com/sites/YOUR-SITE-NAME/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3c230c6d-e1f8-42ed-8302-f8e43c06f49a/deploy-status)](https://app.netlify.com/projects/tembung/deploys)
 
 ## 🎮 Demo
 
-**[Mainkan Tembung →](https://your-site.netlify.app)**
+**[Mainkan Tembung →](https://tembung.netlify.app)**
 
 ## ✨ Fitur
 

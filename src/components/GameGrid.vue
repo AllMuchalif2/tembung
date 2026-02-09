@@ -1,11 +1,16 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   guesses: string[]
   shakeRow: number
   revealRow: number
   getLetterClass: (row: number, col: number) => string
   getFlipDelay: (col: number) => string
 }>()
+
+const getChar = (rowIndex: number, colIndex: number): string => {
+  const row = props.guesses[rowIndex]
+  return row ? (row[colIndex] ?? '') : ''
+}
 </script>
 
 <template>
@@ -23,7 +28,7 @@ defineProps<{
         :class="[getLetterClass(rowIndex, colIndex), revealRow === rowIndex ? 'animate-flip' : '']"
         :style="revealRow === rowIndex ? { animationDelay: getFlipDelay(colIndex) } : {}"
       >
-        {{ guesses[rowIndex][colIndex] || '' }}
+        {{ getChar(rowIndex, colIndex) }}
       </div>
     </div>
   </div>
